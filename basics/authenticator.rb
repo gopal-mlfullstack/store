@@ -17,40 +17,48 @@ users = [
 
 ]
 
-def check_password(users, username, password)
-  for every_user in users 
-      if every_user[:username] == username && every_user[:password] == password
-        return every_user
-      end
+
+def auth_user(username, password, users)
+  users.each do |user | 
+    if user[:username] == username && user[:password] == password
+      return user 
+      
+    
     end
+  end 
+  "Credentials were not correct"    
 end
 
-count = 1
 
-while count <= 3
-    
-    print "Enter your username: "
-    user_name = gets.chomp
-    print "Enter your password: " 
-    user_password = gets.chomp  
-    result = check_password(users, user_name, user_password)
+attempts = 1
 
-    
-    
+while attempts <= 3
     
 
+  
+  print "Enter your username: "
+  user_name = gets.chomp
+  print "Enter your password: " 
+  user_password = gets.chomp
+  
+  result = auth_user(user_name, user_password, users)
 
-    count += 1
+  puts result
+  
+  
+  print "Enter q to quit another key for step ahead: "
+  input = gets.chomp.downcase
+  break if input == "q"
+    
+    
+    
+
+
+  attempts += 1
       
 
 end
 
-if result
-  puts "You are IN.."
-  puts result
-else 
-  puts "Maximum Tried Exceeds.."
-end  
 
-puts "End of Program....."
+puts "You have exceeded the number of attempts..."
 
